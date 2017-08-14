@@ -127,6 +127,21 @@ function populateJumpDirTree() {
 
 function editFileDescription() {
     $('#edit-description').modal('show');
+    var members;
+    $.get('/api/memberlist', function(data) {
+      members = data;
+    });
+    $('[id^="tag"]').selectize({
+      persist: false,
+      openOnFocus: false,
+      closeAfterSelect: true,
+      plugins: ['remove_button'],
+      valueField: 'uuid',
+      labelField: 'name',
+      searchField: 'name',
+      selectOnTab: true,
+      options: members
+    });
     $('#edit-description button').click(function() {
         var this_id = $('#edit-description input[id^="desc"]').attr('id').substr($('#edit-description input[id^="desc"]').attr('id').indexOf("-") + 1);
         if ($('#edit-description input[id="rename-' + this_id + '"]').length) {
@@ -135,6 +150,15 @@ function editFileDescription() {
                 url: "/api/file/rename/" + this_id,
                 data: {
                     title: $('input[id="rename-' + this_id + '"]').val()
+                }
+            });
+        }
+        if ($('#edit-description input[id="tag-' + this_id + '"]').length) {
+            $.ajax({
+                type: "POST",
+                url: "/api/file/tag/" + this_id,
+                data: {
+                    members: $('input[id="tag-' + this_id + '"]').val().split(',')
                 }
             });
         }

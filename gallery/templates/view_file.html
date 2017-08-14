@@ -25,6 +25,11 @@ View File
             <div class="well well-sm" id="description">{{ description }}</div>
         </div>
         {% endif %}
+        {% if tags|length > 0 %}
+        <div class="col-xs-12">
+            <div class="well well-sm"><strong>Tagged: </strong>{{ tags }}</div>
+        </div>
+        {% endif %}
     </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0">
@@ -81,6 +86,8 @@ View File
                                     {% if auth_dict['can_edit'] %}
                                     <label class="control-label" for="rename-{{ file.id }}">Enter a new title for file <strong>{{ file.get_name() }}</strong>:</label>
                                     <input type="text" class="form-control" id="rename-{{ file.id }}" value="{{ file.get_name() }}">
+                                    <label class="control-label" for="rename-{{ file.id }}">Tag CSH members in <strong>{{ file.get_name() }}</strong>:</label>
+                                    <input type="text" class="form-control" id="tag-{{ file.id }}" value="{{ file.get_name() }}">
                                     {% endif %}
                                     <label class="control-label" for="desc-{{ file.id }}">Enter a new description for file <strong>{{ file.get_name() }}</strong>:</label>
                                     <input type="text" class="form-control" id="desc-{{ file.id }}" value="{{ file.caption }}">
