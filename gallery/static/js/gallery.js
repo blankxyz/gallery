@@ -127,20 +127,18 @@ function populateJumpDirTree() {
 
 function editFileDescription() {
     $('#edit-description').modal('show');
-    var members;
     $.get('/api/memberlist', function(data) {
-      members = data;
-    });
-    $('[id^="tag"]').selectize({
-      persist: false,
-      openOnFocus: false,
-      closeAfterSelect: true,
-      plugins: ['remove_button'],
-      valueField: 'uuid',
-      labelField: 'name',
-      searchField: 'name',
-      selectOnTab: true,
-      options: members
+      $('[id^="tag"]').selectize({
+        persist: false,
+        openOnFocus: false,
+        closeAfterSelect: true,
+        plugins: ['remove_button'],
+        valueField: 'uuid',
+        labelField: 'name',
+        searchField: 'name',
+        selectOnTab: true,
+        options: data
+      });
     });
     $('#edit-description button').click(function() {
         var this_id = $('#edit-description input[id^="desc"]').attr('id').substr($('#edit-description input[id^="desc"]').attr('id').indexOf("-") + 1);
