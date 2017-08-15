@@ -114,9 +114,16 @@ h2 {
     display: inline-block;
 }
 
-ul#tags li:not(:last-child):after {
-    content: ',';
-    margin-right: 5px;
+.selectize-dropdown {
+  height: auto;
+}
+
+.selectize-input .remove {
+  margin: 0;
+}
+
+.selectize-control {
+  height: auto;
 }
 
 .pager {

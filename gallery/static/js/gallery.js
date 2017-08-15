@@ -1,3 +1,22 @@
+$(document).ready(function() {
+  if ($('input[id^="tag-"]').length) {
+    $.get('/api/memberlist', function(data) {
+      $('input[id^="tag-"]').selectize({
+        persist: false,
+        openOnFocus: false,
+        closeAfterSelect: true,
+        plugins: ['remove_button'],
+        valueField: 'uuid',
+        labelField: 'name',
+        searchField: 'name',
+        selectOnTab: true,
+        options: data,
+        items: tags
+      });
+    });
+  }
+});
+
 function afterMkdir(data) {
     if (data['error'].length > 0) {
         var message = " Error: Could not create director" + ((data['error'].length > 1) ? 'ies' : 'y') + ":";
@@ -127,19 +146,6 @@ function populateJumpDirTree() {
 
 function editFileDescription() {
     $('#edit-description').modal('show');
-    $.get('/api/memberlist', function(data) {
-      $('[id^="tag"]').selectize({
-        persist: false,
-        openOnFocus: false,
-        closeAfterSelect: true,
-        plugins: ['remove_button'],
-        valueField: 'uuid',
-        labelField: 'name',
-        searchField: 'name',
-        selectOnTab: true,
-        options: data
-      });
-    });
     $('#edit-description button').click(function() {
         var this_id = $('#edit-description input[id^="desc"]').attr('id').substr($('#edit-description input[id^="desc"]').attr('id').indexOf("-") + 1);
         if ($('#edit-description input[id="rename-' + this_id + '"]').length) {

@@ -31,7 +31,7 @@ View File
               <strong>Tagged: </strong>
               <ul>
                 {% for tag in tags %}
-                <li>{{tag}}</li>
+                <li>{{ ldap_convert_uuid_to_displayname(tag) }}{% if not loop.last %}, {% endif %}</li>
                 {% endfor %}
               </ul>
             </div>
@@ -136,5 +136,9 @@ View File
 <script>
     var mode = "VIEW_FILE";
     var parent = {{ parent }};
+    var tags = [];
+    {% for tag in tags %}
+    tags.push("{{tag}}");
+    {% endfor %}
 </script>
 {% endblock %}

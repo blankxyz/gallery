@@ -554,6 +554,12 @@ def tag_file(file_id, auth_dict=None):
             or auth_dict['uuid'] == file_model.author):
             return "Permission denied", 403
 
+    current_tags = Tag.query.filter(Tag.file_id == file_id).all()
+    for tag in current_tags:
+        db.session.delete(tag)
+        db.session.flush()
+        db.session.commit()
+
     uuids = request.form.get('members')
     uuids = uuids.replace('[', '')
     uuids = uuids.replace(']', '')
@@ -775,8 +781,7 @@ def render_file(file_id, auth_dict=None):
     path_stack.reverse()
     auth_dict['can_edit'] = (auth_dict['is_eboard'] or auth_dict['is_rtp'] or auth_dict['uuid'] == file_model.author)
     auth_dict['can_desc'] = len(file_model.caption) == 0
-    tags = [ldap_convert_uuid_to_displayname(tag.uuid)
-        for tag in Tag.query.filter(Tag.file_id == file_id).all()]
+    tags = [tag.uuid for tag in Tag.query.filter(Tag.file_id == file_id).all()]
     return render_template("view_file.html",
                            file_id=file_id,
                            file=file_model,
