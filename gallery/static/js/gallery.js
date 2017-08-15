@@ -152,11 +152,12 @@ function editFileDescription() {
             });
         }
         if ($('#edit-description input[id="tag-' + this_id + '"]').length) {
+            var members = JSON.stringify($('input[id="tag-' + this_id + '"]').val().split(','));
             $.ajax({
                 type: "POST",
                 url: "/api/file/tag/" + this_id,
                 data: {
-                    members: $('input[id="tag-' + this_id + '"]').val().split(',')
+                    members: members
                 }
             });
         }

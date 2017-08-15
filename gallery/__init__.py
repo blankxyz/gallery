@@ -555,6 +555,9 @@ def tag_file(file_id, auth_dict=None):
             return "Permission denied", 403
 
     uuids = request.form.get('members')
+    uuids = uuids.replace('[', '')
+    uuids = uuids.replace(']', '')
+    uuids = [uuid.replace('"', '') for uuid in uuids.split(',')]
 
     for uuid in uuids:
         tag_model = Tag(file_id, uuid)
