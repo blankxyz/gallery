@@ -27,7 +27,14 @@ View File
         {% endif %}
         {% if tags|length > 0 %}
         <div class="col-xs-12">
-            <div class="well well-sm"><strong>Tagged: </strong>{{ tags }}</div>
+            <div class="well well-sm" id="tags">
+              <strong>Tagged: </strong>
+              <ul>
+                {% for tag in tags %}
+                <li>{{tag}}</li>
+                {% endfor %}
+              </ul>
+            </div>
         </div>
         {% endif %}
     </div>

@@ -104,6 +104,21 @@ h2 {
     font-weight: bolder;
 }
 
+.well#tags ul {
+    list-style-type: none;
+    display: inline;
+    padding: 0;
+}
+
+.well#tags li {
+    display: inline-block;
+}
+
+ul#tags li:not(:last-child):after {
+    content: ',';
+    margin-right: 5px;
+}
+
 .pager {
     margin: 0;
 }
