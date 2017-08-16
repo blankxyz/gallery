@@ -25,18 +25,6 @@ View File
             <div class="well well-sm" id="description">{{ description }}</div>
         </div>
         {% endif %}
-        {% if tags|length > 0 %}
-        <div class="col-xs-12">
-            <div class="well well-sm" id="tags">
-              <strong>Tagged: </strong>
-              <ul>
-                {% for tag in tags %}
-                <li>{{ ldap_convert_uuid_to_displayname(tag) }}{% if not loop.last %}, {% endif %}</li>
-                {% endfor %}
-              </ul>
-            </div>
-        </div>
-        {% endif %}
     </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0">
@@ -65,7 +53,17 @@ View File
                 Text Data
             {% endif %}
 
-            <p>Date Uploaded: {{ file.date() }}</p>
+            {% if tags|length > 0 %}
+            <div id="tags">
+              <strong>Tagged: </strong>
+              <ul>
+                {% for tag in tags %}
+                <li>{{ ldap_convert_uuid_to_displayname(tag) }}{% if not loop.last %}, {% endif %}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+            <p><strong>Date Uploaded:</strong> {{ file.date() }}</p>
 
             {% if prev_file != -1 or next_file != -1 %}
                 <ul class="pager">

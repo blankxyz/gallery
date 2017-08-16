@@ -104,13 +104,17 @@ h2 {
     font-weight: bolder;
 }
 
-.well#tags ul {
+#tags {
+    margin: 10px;
+}
+
+#tags ul {
     list-style-type: none;
     display: inline;
     padding: 0;
 }
 
-.well#tags li {
+#tags li {
     display: inline-block;
 }
 
