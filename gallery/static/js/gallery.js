@@ -321,6 +321,14 @@ function kbGalleryDelete() {
     }
 }
 
+function kbGalleryEdit() {
+    if(mode == "VIEW_DIR") {
+        editDirDescription();
+    } else if(mode == "VIEW_FILE") {
+        editFileDescription();
+    }
+}
+
 Mousetrap.bind('space', kbGalleryVideoSelect);
 Mousetrap.bind('enter', kbGallerySelect);
 Mousetrap.bind(['h', 'left'], kbGalleryPrevious);
@@ -332,6 +340,7 @@ Mousetrap.bind('c', kbGalleryCreateDir);
 Mousetrap.bind('u', kbGalleryUpload);
 Mousetrap.bind('f', kbGalleryFullscreen);
 Mousetrap.bind('d', kbGalleryDelete);
+Mousetrap.bind('e', kbGalleryEdit);
 Mousetrap.bind(['command+k', 'ctrl+k'], kbGalleryFastNavigation);
 
 function setFullscreen(elem) {
