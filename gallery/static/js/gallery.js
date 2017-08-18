@@ -302,7 +302,8 @@ function kbGalleryUpload() {
         document.location = "/upload";
     }
 }
-function kbGalleryFastNavigation() {
+function kbGalleryFastNavigation(e) {
+    e.preventDefault();
     document.location = "/jump_dir";
 }
 
