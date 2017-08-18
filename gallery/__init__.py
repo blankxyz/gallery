@@ -393,6 +393,9 @@ def delete_file(file_id, auth_dict=None):
         return "Permission denied", 403
 
     file_path = os.path.join(get_full_dir_path(file_model.parent), file_model.name)
+    current_tags = Tag.query.filter(Tag.file_id == file_id).all()
+    for tag in current_tags:
+        db.session.delete(tag)
     db.session.delete(file_model)
     os.remove(file_path)
     db.session.flush()
